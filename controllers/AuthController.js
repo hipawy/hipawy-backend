@@ -41,7 +41,7 @@ exports.signIn = async (req, res) => {
 
     res.status(200).json({
       message: "You're logged in",
-      id: newUser.id,
+      user: newUser,
       token
     });
   } catch (err) {
