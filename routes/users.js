@@ -14,4 +14,10 @@ router
   .route("/:userId/pets")
   .post(isAuthenticated, UserController.createPet)
   .get(UserController.getUserPets);
+
+router
+  .route("/:userId/pets/:petId")
+  .get(isAuthenticated, UserController.getUserPetById)
+  .patch(isAuthenticated, UserController.updateUserPetById)
+  .delete(isAuthenticated, UserController.deletePetById);
 module.exports = router;
