@@ -5,4 +5,9 @@ const UserController = require("../controllers/UserController");
 
 router.get("/", isAuthenticated, UserController.getUsers);
 
+router
+  .route("/:id")
+  .get(isAuthenticated, UserController.getUserById)
+  .patch(isAuthenticated, UserController.updateUserById);
+
 module.exports = router;
