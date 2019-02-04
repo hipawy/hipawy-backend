@@ -22,3 +22,25 @@ exports.getUserById = async (req, res) => {
     res.status(500).json({ message: "There is an error.", err });
   }
 };
+
+exports.updateUserById = async (req, res) => {
+  if (req.user.id.toString() === req.params.id) {
+    try {
+      const [isUpdated] = await User.update(req.body, {
+        where: { id: req.params.id }
+      });
+
+      if (Boolean(isUpdated)) {
+        const user = await User.findById(req.params.id);
+
+        res.status(200).json({ user });
+      } else {
+        res.status(400).json({});
+      }
+    } catch (err) {
+      res.status(500).json({ message: "There is an error.", err });
+    }
+  } else {
+    res.status(400).json({ message: "Token doesn't match" });
+  }
+};
