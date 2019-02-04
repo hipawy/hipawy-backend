@@ -10,4 +10,8 @@ router
   .get(isAuthenticated, UserController.getUserById)
   .patch(isAuthenticated, UserController.updateUserById);
 
+router
+  .route("/:userId/pets")
+  .post(isAuthenticated, UserController.createPet)
+  .get(UserController.getUserPets);
 module.exports = router;
