@@ -113,3 +113,29 @@ exports.updateUserPetById = async (req, res) => {
     res.status(400).json({ message: "Token doesn't match" });
   }
 };
+
+exports.deletePetById = async (req, res) => {
+  if (req.user.id.toString() === req.params.userId) {
+    try {
+      sequelize.transaction(async transaction => {
+        await Pet.destroy({ where: { id: req.params.petId } }, { transaction });
+
+        await UserPet.destroy(
+          {
+            where: {
+              id_user: req.params.userId,
+              id_pet: req.params.petId
+            }
+          },
+          { include: [User, Pet], transaction }
+        );
+
+        res.status(200).json({ message: "Record deleted." });
+      });
+    } catch (err) {
+      res.status(500).json({ message: "There is an error.", err });
+    }
+  } else {
+    res.status(400).json({ message: "Token doesn't match" });
+  }
+};
