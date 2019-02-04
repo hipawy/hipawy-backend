@@ -65,3 +65,16 @@ exports.createPet = async (req, res) => {
     res.status(500).json({ err });
   }
 };
+
+exports.getUserPets = async (req, res) => {
+  try {
+    const pets = await UserPet.findAll({
+      where: { id_user: req.params.userId },
+      include: [Pet]
+    });
+
+    res.status(200).json({ pets });
+  } catch (err) {
+    res.status(500).json({ err });
+  }
+};
