@@ -3,21 +3,24 @@ module.exports = (sequelize, DataTypes) => {
   const pet = sequelize.define(
     "pet",
     {
-      name: DataTypes.STRING,
-      category: DataTypes.ENUM("cat", "dog"),
-      breed: DataTypes.STRING,
-      age: DataTypes.STRING,
-      address: DataTypes.STRING,
-      province: DataTypes.STRING,
-      city: DataTypes.STRING,
-      gender: DataTypes.ENUM("male", "female"),
-      photo: DataTypes.STRING,
-      desc: DataTypes.TEXT
+      name: { type: DataTypes.STRING, allowNull: false },
+      category: { type: DataTypes.ENUM("cat", "dog"), allowNull: false },
+      breed: { type: DataTypes.STRING, allowNull: false },
+      age: { type: DataTypes.STRING, allowNull: false },
+      address: { type: DataTypes.STRING, allowNull: false },
+      province: { type: DataTypes.STRING, allowNull: false },
+      city: { type: DataTypes.STRING, allowNull: false },
+      gender: { type: DataTypes.ENUM("male", "female"), allowNull: false },
+      photo: { type: DataTypes.STRING, allowNull: false },
+      desc: { type: DataTypes.TEXT, allowNull: false }
     },
     {}
   );
   pet.associate = function(models) {
-    // associations can be defined here
+    models.pet.hasMany(models.userPet, {
+      foreignKey: "id_pet",
+      sourceKey: "id"
+    });
   };
   return pet;
 };
