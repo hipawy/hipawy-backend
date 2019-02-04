@@ -91,3 +91,25 @@ exports.getUserPetById = async (req, res) => {
     res.status(500).json({ err });
   }
 };
+
+exports.updateUserPetById = async (req, res) => {
+  if (req.user.id.toString() === req.params.userId) {
+    try {
+      const [isUpdated] = await Pet.update(req.body, {
+        where: { id: req.params.petId }
+      });
+
+      if (Boolean(isUpdated)) {
+        const pet = await Pet.findById(req.params.petId);
+
+        res.status(200).json({ pet });
+      } else {
+        res.status(400).json({});
+      }
+    } catch (err) {
+      res.status(500).json({ message: "There is an error.", err });
+    }
+  } else {
+    res.status(400).json({ message: "Token doesn't match" });
+  }
+};
