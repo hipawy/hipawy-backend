@@ -12,6 +12,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
 app.use("/api/users", require("./routes/users"));
+app.use("/api/pets", require("./routes/pets"));
 app.use("/api/auth", require("./routes/auth"));
 
 app.listen(PORT, () => console.log(`Server start in PORT ${PORT}`));
