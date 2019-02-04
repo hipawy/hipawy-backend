@@ -44,3 +44,24 @@ exports.updateUserById = async (req, res) => {
     res.status(400).json({ message: "Token doesn't match" });
   }
 };
+
+exports.createPet = async (req, res) => {
+  try {
+    sequelize.transaction(async transaction => {
+      const pet = await Pet.create(req.body, { transaction });
+
+      const userPet = await UserPet.create(
+        {
+          id_user: req.params.userId,
+          id_pet: pet.id,
+          status: "registered"
+        },
+        { include: [User, Pet], transaction }
+      );
+
+      res.status(200).json({ pet, userPet });
+    });
+  } catch (err) {
+    res.status(500).json({ err });
+  }
+};
