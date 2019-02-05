@@ -9,6 +9,7 @@ module.exports = (sequelize, DataTypes) => {
       address: { type: DataTypes.STRING, allowNull: false },
       province: { type: DataTypes.STRING, allowNull: false },
       city: { type: DataTypes.STRING, allowNull: false },
+      photo: { type: DataTypes.STRING, allowNull: false },
       phone: { type: DataTypes.STRING, allowNull: false }
     },
     {}
