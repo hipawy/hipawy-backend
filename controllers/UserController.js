@@ -5,7 +5,7 @@ const UserPet = require("../models").userPet;
 
 exports.getUsers = async (req, res) => {
   try {
-    const users = await user.findAll();
+    const users = await User.findAll();
 
     res.status(200).json({ users });
   } catch (err) {
