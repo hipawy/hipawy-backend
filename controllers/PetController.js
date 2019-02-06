@@ -1,4 +1,6 @@
 const Pet = require("../models").pet;
+const UserPet = require("../models").userPet;
+const User = require("../models").user;
 
 exports.getPets = async (req, res) => {
   if (req.query) {
@@ -17,5 +19,19 @@ exports.getPets = async (req, res) => {
     Pet.findAll()
       .then(pets => res.status(200).json({ pets }))
       .catch(err => res.status(500).json(err));
+  }
+};
+
+exports.getPetUserById = async (req, res) => {
+  try {
+    const pet = await UserPet.findOne({
+      where: { id_pet: req.params.petId, id_user: req.params.userId },
+      include: [Pet, User]
+    });
+
+    res.status(200).json({ pet });
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({ err });
   }
 };
