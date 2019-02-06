@@ -24,12 +24,12 @@ exports.getPets = async (req, res) => {
 
 exports.getPetUserById = async (req, res) => {
   try {
-    const pet = await UserPet.findOne({
+    const petUser = await UserPet.findOne({
       where: { id_pet: req.params.petId, id_user: req.params.userId },
       include: [Pet, User]
     });
 
-    res.status(200).json({ pet });
+    res.status(200).json({ petUser });
   } catch (err) {
     console.log(err);
     res.status(500).json({ err });
