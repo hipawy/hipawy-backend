@@ -5,7 +5,7 @@ exports.isAuthenticated = async (req, res, next) => {
   try {
     const token =
       req.headers.authorization && req.headers.authorization.split(" ")[1];
-
+    console.log(token);
     if (token === undefined) {
       return res.status(401).json({ message: "Token not found." });
     }
