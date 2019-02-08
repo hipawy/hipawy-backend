@@ -53,8 +53,7 @@ exports.createPet = async (req, res) => {
       const userPet = await UserPet.create(
         {
           id_user: req.params.userId,
-          id_pet: pet.id,
-          status: "registered"
+          id_pet: pet.id
         },
         { include: [User, Pet], transaction }
       );
