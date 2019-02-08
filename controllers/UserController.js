@@ -73,7 +73,7 @@ exports.getUserPets = async (req, res) => {
       include: [Pet]
     });
 
-    res.status(200).json({ pets });
+    res.status(200).json({ pets: pets.map(pet => pet.pet) });
   } catch (err) {
     res.status(500).json({ err });
   }

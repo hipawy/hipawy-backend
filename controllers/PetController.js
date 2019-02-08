@@ -5,7 +5,6 @@ const User = require("../models").user;
 exports.getPets = async (req, res) => {
   if (req.query) {
     let condition = {};
-
     Object.keys(req.query).forEach(key =>
       Object.assign(condition, {
         [key]: { $like: `%${req.query[key]}%` }
