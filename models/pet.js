@@ -12,7 +12,11 @@ module.exports = (sequelize, DataTypes) => {
       city: { type: DataTypes.STRING, allowNull: false },
       gender: { type: DataTypes.ENUM("male", "female"), allowNull: false },
       photo: { type: DataTypes.STRING, allowNull: false },
-      desc: { type: DataTypes.TEXT, allowNull: false }
+      desc: { type: DataTypes.TEXT, allowNull: false },
+      status: {
+        type: DataTypes.ENUM("registered", "adopted"),
+        allowNull: false
+      }
     },
     {}
   );

@@ -48,6 +48,10 @@ module.exports = {
         allowNull: false,
         type: Sequelize.TEXT
       },
+      status: {
+        allowNull: false,
+        type: Sequelize.ENUM("registered", "adopted")
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE
