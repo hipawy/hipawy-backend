@@ -1,12 +1,6 @@
 "use strict";
 module.exports = (sequelize, DataTypes) => {
-  const userPet = sequelize.define(
-    "userPet",
-    {
-      status: { type: DataTypes.STRING, allowNull: false }
-    },
-    {}
-  );
+  const userPet = sequelize.define("userPet", {}, {});
   userPet.associate = function(models) {
     models.userPet.belongsTo(models.user, {
       onDelete: "CASCADE",
